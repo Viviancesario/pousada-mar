@@ -1,0 +1,726 @@
+/*====  RESET ============================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+/*====  VARIABLES ============================ */
+:root {
+  --header-height: 4.5rem;
+
+  /* colors */
+  --hue: 345;
+  /* HSL color mode */
+  --base-color: #ff3366;
+  --base-color-second: hsl(var(--hue), 88%, 72%);
+  --base-color-alt: hsl(var(--hue) 57% 53%);
+  --title-color: hsl(var(--hue) 41% 10%);
+  --text-color: hsl(0 0% 46%);
+  --text-color-light: hsl(0 0% 98%);
+  --body-color: hsl(0, 0%, 98%);
+
+
+    /*Fonts*/
+
+    --title-font-size: 1.875rem;
+    --subtitle-font-size: 1rem;
+  
+    --title-font: 'Poppins', sans-serif;
+    --body-font: 'DM Sans', sans-serif;
+}
+
+/*====  BASE ============================ */
+body {
+  font: 400 1rem 'DM Sans', sans-serif;
+  color: var(--text-color);
+  background: var(--body-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font: 700 1.875rem 'Poppins', sans-serif;
+  color: var(--title-color);
+  -webkit-font-smoothing: auto;
+}
+
+.button {
+  background-color: var(--base-color);
+  color: var(--text-color-light);
+  height: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 2rem;
+  border-radius: 0.25rem;
+  font: 500 1rem 'DM Sans', sans-serif;
+  transition: background 0.3s;
+}
+
+
+.button:hover {
+  background: var(--base-color-alt);
+}
+
+.divider-1 {
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 36%, 57%, 1), 
+    hsla(var(--hue), 65%, 88%, 0.34)
+  );
+}
+
+
+
+.divider-2 {
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 65%, 88%, 0.34),
+    hsla(var(--hue), 36%, 57%, 1) 
+  );
+}
+
+
+/*====  LAYOUT ============================ */
+.container {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+ 
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  
+}
+
+
+.section {
+  padding: 3rem 0;
+}
+
+.section .title {
+  margin-bottom: 1rem;
+}
+
+#header {
+  border-bottom: 1px solid hsl(0, 0%, 89%);
+  /*margin-bottom: 2rem; */
+  display: flex;
+/* position fixed fixes the item in the entire page, regardless if the page scrolls, in the case, the fixed section overlaps the page, bringing it to the top, so we have to add the section height the main doc to compensate */ 
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: var(--body-color);
+  width: 100%;
+}
+
+#header.scroll {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+  background-color: var(--base-color);
+
+}
+
+#header.scroll span {
+  color: white;
+}
+
+#header.scroll .icon-menu {
+  color: white;
+}
+
+nav {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logo {
+  font: 700 1.31rem 'Poppins', sans-serif;
+  color: var(--title-color);
+}
+
+.logo span {
+  color: var(--base-color);
+}
+
+main {
+  margin-top: var(--header-height);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.title {
+  font: 700 var(--title-font-size) var(--title-font);
+  color: var(--title-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+/*====  MENU ============================ */
+
+nav .menu {
+  opacity: 0;
+  visibility: hidden;
+  top: -20rem;
+  transition: 0.2s;
+  
+}
+
+
+
+/* Quando o nav tiver o show procure o menu lá dentro */
+nav.show .menu{
+  opacity: 1;
+  visibility: visible;
+
+  background: var(--body-color);
+  height: 100vh;
+  width: 100vw;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  place-content: center;
+  display: grid;
+  gap: 4rem;
+  text-align: center;
+
+}
+
+nav.show .menu .grid {
+  display: grid;
+  gap: 4rem;
+}
+
+nav ul li a {
+  transition: color 0.2s;
+  position: relative;
+}
+
+nav ul li a:hover {
+  color: var(--base-color);
+}
+
+nav ul li a::after {
+  content: '';
+  width: 0%;
+  height: 2px;
+  background: var(--base-color);
+  position: absolute;
+  left: 0;
+  bottom: -1.5rem;
+  
+  transition: width 0.2s;
+
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+/*====  TOOGLE MENU ============================ */
+
+nav .icon-close {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: -1.5rem;
+  right: 1.5rem;
+  transition: 0.3s;
+}
+
+nav.show .icon-close {
+  visibility: visible;
+  opacity: 1;
+  top: 1.5rem;
+}
+
+.toggle {
+  color: var(--base-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/*====  HOME ============================ */
+#home {
+  overflow: hidden;
+}
+
+#home .container {
+  margin: 0;
+}
+
+#home .image {
+  position: relative;
+ 
+  
+  
+}
+
+#home .image::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: var(--base-color-second);
+  position: absolute;
+  top: -16.8%;
+  left: 16.7%;
+  z-index: 0;
+}
+
+#home .image img {
+  position: relative;
+  right: 2.93rem;
+}
+
+#home .image img,
+#home .image::before {
+  border-radius: 0.25rem;
+}
+
+ 
+.text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  text-align: center;
+}
+
+
+.text h1 {
+  margin-bottom: 1rem;
+}
+
+
+.text p {
+  margin-bottom: 2rem;
+}
+
+
+/*====  ROOMS ============================ */
+
+#rooms {
+  background-color: white;
+}
+
+ 
+#rooms .cards {
+
+  display: grid;
+  gap: 1.5rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+#rooms .card {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
+  background: hsl(0, 0%, 98%);
+  border-radius: 0.25rem 0.25rem 0 0;
+  padding: 3rem 2rem;
+  border-bottom: 4px solid var(--base-color);
+}
+
+#rooms .card p {
+  margin-bottom: 1rem;
+  margin-top: 0.25rem;
+}
+
+#rooms .card img {
+  border-radius: 0.25rem;
+}
+
+#rooms .text h1 {
+  margin-bottom: 0.75rem;
+  
+}
+
+
+.card .prices {
+  
+  color: black;
+  font: 600 1rem 'Poppins', sans-serif;
+  text-align: left;
+}
+
+
+.crossedPrice {
+  font: 100 1rem 'Poppins', sans-serif;
+}
+
+.checked {
+  color: orange;
+}
+
+.comments {
+  color: black;
+  font: 400 1rem 'DM Sans', sans-serif;
+}
+
+.moreText {
+  display: none;
+  
+}
+
+.read-more-btn {
+  padding: 2px 5px;
+  cursor: pointer;
+  font: 400 0.8rem 'DM Sans', sans-serif;
+  color: black;
+  margin-bottom: 2rem;
+  margin-top: 0rem;
+}
+
+
+.lessText.show-more .moreText {
+  display: inline;
+}
+
+.lastUnits {
+  color: rgb(211, 0, 0);
+  font: 500 1rem 'DM Sans', sans-serif;
+}
+
+
+.rareFind {
+  color: rgb(17, 114, 194);
+  font: 500 1rem 'DM Sans', sans-serif;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.3rem;
+  background-color: white;
+  padding: 0.1rem;
+ 
+   
+}
+
+.icons {
+  border-style: solid;
+  border-width: 0.05rem;
+}
+
+
+/*background-color: var(--base-color);
+  color: var(--text-color-light);
+  height: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 2rem;
+  border-radius: 0.25rem;
+  font: 500 1rem 'DM Sans', sans-serif;
+  transition: background 0.3s;*/
+
+.grid-container > div {
+  text-align: left;
+  padding: 0rem 0rem;
+  font-size: 1rem;
+  color: black;
+  margin: 0rem 0rem;
+  padding: .2rem;
+  border-radius: 0.25rem;
+  background-color: white;
+  border-color: black;
+
+  
+  
+      
+}
+
+.icons p{
+  font: 300 0.8rem 'DM Sans', sans-serif;
+}
+
+.grid-main {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1rem;
+  padding: 0rem 0rem;
+  margin: 0rem 0rem;
+  
+}
+
+
+
+/* Other Rooms */
+
+
+
+
+#other-rooms .cards {
+
+  display: grid;
+  gap: 1.5rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+#other-rooms .card {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
+  background: hsl(0, 0%, 98%);
+  border-radius: 0.25rem 0.25rem 0 0;
+  padding: 3rem 2rem;
+  border-bottom: 4px solid var(--base-color);
+}
+
+#other-rooms .card p {
+  margin-bottom: 1rem;
+  margin-top: 0.25rem 0.25rem 0 0;
+}
+
+#other-rooms .card img {
+  border-radius: 0.25rem;
+}
+
+#other-rooms .text h1 {
+  margin-bottom: 0.75rem;
+}
+
+
+
+/*------------ TESTIMONIAL ----------------*/
+
+#testimonials {
+  background-color: white;
+  
+}
+
+  .center {
+  margin: 0;
+  width: 0;
+}
+
+.button-reviews {
+  background-color: var(--base-color);
+  color: var(--text-color-light);
+  height: 3.5rem;
+ 
+  display: inline-flex;
+  align-items: center;
+  padding: 0 2rem;
+  border-radius: 0.25rem;
+  font: 500 1rem 'DM Sans', sans-serif;
+  transition: background 0.3s;
+  margin-left: 10rem;
+}
+
+/*
+.center {
+  width: auto;
+  margin: auto;
+} */
+
+
+blockquote {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
+  background: hsl(0, 0%, 98%);
+  border-radius: 0.25rem;
+  padding: 3rem 2rem;
+  
+}
+
+
+#testimonials blockquote p {
+  
+  position: relative; 
+  text-indent: 1.875rem;
+  margin-bottom: 1.5rem;
+}
+
+#testimonials blockquote p span {
+  color: var(--base-color);
+  font: 700 3rem serif;
+  position: absolute; 
+  top: -0.6rem;
+  left: -1.8rem;
+}
+
+#testimonials blockquote {
+  padding: 2rem;
+
+}
+
+#testimonial cite {
+  display: flex;
+  align-items: center;
+   
+}
+
+
+#testimonials cite img {
+  height: 2rem;
+  width: 2rem;
+  object-fit: cover;
+  clip-path: circle();
+  margin-right: 0.5rem;
+  margin-bottom: -0.7rem;
+}
+
+#testimonials span#reviews {
+  font: 400 1rem 'DM Sans', sans-serif;
+  color: var(--title-color);
+  
+  -webkit-font-smoothing: antialiased;
+}
+
+/*------------ ABOUT US ----------------*/
+
+
+
+
+#about .image {
+  position: relative;
+      
+}
+
+#about .image::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: var(--base-color-second);
+  position: absolute;
+  top: -8.3%;
+  right: 32.9%;
+  z-index: 0;
+}
+
+#about .image img {
+  position: relative;
+  margin: 0;
+  
+}
+
+
+#about .image::before {
+  border-radius: 0.25rem;
+}
+
+
+#contact i {
+  color: var(--base-color);
+ 
+}
+
+
+#contact .button i {
+  color: var(--white);
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+}
+
+
+#contact strong {
+  color: var(--black);
+}
+
+#contact ul.grid {
+  
+  gap: 2rem;
+  text-align: left;
+  margin-top: 2rem;
+}
+
+#contact .button:hover {
+  background-color: var(--base-color-second);
+}
+
+.button {
+ 
+  height: 4rem;
+  width: 16rem;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+
+
+
+/*======================= FOOTER =======================*/
+
+footer {
+  background-color: var(--base-color);
+}
+
+footer span#florianopolis {
+  color: var(--black);
+}
+
+.logo-alt span {
+  color: white;
+}
+
+footer i {
+  color: #f9f9f9;
+  font-size: 1.5rem;
+  text-align: left;
+  
+}
+
+footer .social a {
+  margin-right: 2rem;
+  transition: 0.3s;
+  text-align: left;
+}
+
+footer .social a:hover {
+  transform: translateY(-8px);
+}
+
+footer p {
+  color: #f9f9f9;
+  margin-bottom: 0.75rem;
+}
+
+footer p#pousada {
+  margin-top: 1.5rem;
+}
+
+footer .logo {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+footer.section {
+  padding: 4rem 0;
+}
+
+#home .button {
+  width: auto;
+  margin: auto;
+}
+
+
+/* LEARNIGNS */
+
+/*
+
+grid-auto-flow: column;
+
+
+
+*/
